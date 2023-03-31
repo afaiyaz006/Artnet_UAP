@@ -53,7 +53,13 @@
       var username_error = document.getElementById("error_username")
       var password_error = document.getElementById("error_password")
       var login_button = document.getElementById("submitbtn")
-
+      
+      var username_field = document.getElementById("id_username")
+      var password_field = document.getElementById("id_password")
+      var username_error = document.getElementById("error_username")
+      var password_error = document.getElementById("error_password")
+      var login_button = document.getElementById("submitbtn")
+      
       username_field.addEventListener("keyup",username_checker);
       password_field.addEventListener("keyup", password_checker);
       login_button.addEventListener("click",empty_checker )
