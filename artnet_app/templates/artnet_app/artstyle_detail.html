@@ -1,0 +1,13 @@
+{% extends "artnet_app/base.html"%}
+{% block content %}
+<div class="container-fluid">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+                <h1 class="text-center">{{artstyle.style_name}}</h1>
+                <div class="card border border-dark border-width-2 rounded-0">
+                        <img class="img-fluid" src='{{artstyle.artStyle_image.url}}' height=600 width=800/>
+                        
+                </div>
+                <a href="{% url 'create_artwork_artstyle' %}" class="btn btn-outline-dark rounded-0 m-3" style="box-shadow: 5px 5px 0px 0px #000">Use</a>
+        </div>
+</div>
+{% endblock %}
