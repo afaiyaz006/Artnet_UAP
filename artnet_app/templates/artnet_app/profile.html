@@ -1,0 +1,94 @@
+{% extends 'artnet_app/base.html' %}
+{% block content %}
+<div class="row" >
+    <div class="container d-flex flex-row justify-content-center align-content-center p-3" >
+        <div class="card border rounded-0 border-dark border-width:5px p-3">
+            <div class="container d-flex flex-row justify-content-center align-content-center">
+                <img style="max-width:80px; max-height:80px" class="card-img-top rounded-circle img-thumbnail border-dark" style="box-shadow: 5px 5px 0px 0px #000" src="{{user.profile.avatar_link}}" alt="Card image cap">
+            </div>
+            <div class="p-3 card border border-dark border-width-2 rounded-0 mt-2" style="width: 18rem;">
+                <p class="text-center">
+                    Hello there! {{user.profile.first_name}}
+
+                </p>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item border-dark">
+                    First Name: {{user.profile.first_name}}
+                  </li>
+                  <li class="list-group-item border-dark">
+                    Last Name: {{user.profile.last_name}}
+                </li>
+                  <li class="list-group-item border-dark">
+                    Email: {{user.profile.email}}
+                </li>
+                  <li class="list-group-item border-dark">
+                    Gender: {{user.profile.gender}}
+                    
+                  </li>
+                  <li class="list-group-item">
+                    Occupation:
+                    {{user.profile.occupation}}
+                      
+                    </li>
+                  
+                </ul>
+              </div>
+              <div class="card border border-dark border-width-2 rounded-0 m-3">
+                <p class="text-center">What you wanna do?</p>
+            
+                <a  href="{% url 'create_artwork' %}" type="button" class="btn btn-outline-dark rounded-0 m-3" style="box-shadow: 5px 5px 0px 0px #000">Create Artwork</a>
+                <a href="{% url 'submit_artstyle' %}" type="button" class="btn btn-outline-dark rounded-0 m-3" style="box-shadow: 5px 5px 0px 0px #000">Submit Artstyle</a>
+                <a href="{% url 'diffusion_art' %}" class="btn btn-outline-dark rounded-0 m-3" style="box-shadow: 5px 5px 0px 0px #000">Generate Artwork</a>
+            </div>
+            
+        </div>
+
+    </div>
+</div>
+<div class="row" >
+    <div class="card border border-dark border-width-2">
+        <div class="card-header">
+            <h1 class="text-center"> Gallery </h1>
+
+        </div>
+        <div class="card-body border border-dark border-width-2">
+
+            <h1 class="text-center"> Artwork </h1>
+        
+                <div class="d-flex justify-content-center">
+                   
+                    {% for artwork in artworks%}
+                    <div class="thumbnail m-3 ">
+                        <a href="{{artwork.get_absolute_url}}">
+                            <img src="{{artwork.artwork_image.url}}" alt="Lights"  style="width:100%">
+                        </a>
+                        <p class="fw-bold text-center">{{artwork.name}}</p>
+                    </div>
+                    {% endfor %}
+                    
+                </div>
+              
+        </div>
+        <div class="card-body border border-dark border-width-2">
+            <h1 class="text-center">Styles</h1>
+
+        
+            <div class="d-flex justify-content-center">
+                
+                {% for artstyle in artstyles %}
+                <div class="thumbnail m-3 ">
+                    <a href="{{artstyle.get_absolute_url}}">
+                        <img src="{{artstyle.artStyle_image.url}}" alt="Lights"  style="width:100%">
+                    </a>
+                    <p class="fw-bold text-center">{{artstyle.style_name}}</p>
+                </div>
+                {% endfor %}
+                
+            </div>
+          
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
