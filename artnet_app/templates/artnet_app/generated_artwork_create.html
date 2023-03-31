@@ -1,0 +1,23 @@
+
+{% extends 'artnet_app/base.html'%}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{%block content%}
+
+<div class="d-flex flex-row p-3 justify-content-center align-items-center">
+<div class="card rounded-0 border border-dark p-3">
+<h1> 🌇 </h1>
+<h1> Create artwork ! </h1>
+{% if errors %}
+    <code>{{errors}}</code>
+    <code>If you are adminstrator please check if the backend url is ok or not.</code>
+{% endif %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class='btn btn-outline-success m-3 rounded-0' style="box-shadow: 5px 5px 0px 0px #000">Create</button>
+    </article>
+</form>
+</div>
+</div>
+{% endblock %}
