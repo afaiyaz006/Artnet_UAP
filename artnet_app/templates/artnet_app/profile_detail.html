@@ -3,7 +3,12 @@
 
 <article>
     
-   
+   <img src='{{profile.avatar_link}}' height=30% width=20%>
+    <h1> {{profile.user.first_name}} {{profile.user.last_name}} </h1>
+    {% if Success %}
+        <blockquote> Artstyle submission successfull </blockquote>
+    {% endif %}
+
     <table>
         <tbody>
             <span class="border rounded-0">
