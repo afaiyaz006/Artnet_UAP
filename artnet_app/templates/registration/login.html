@@ -1,0 +1,110 @@
+{% extends 'artnet_app/base.html' %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{% block content %}
+
+
+
+    {% if user.is_authenticated %}
+      <p>You are already logged in.</p>
+    {% else %}
+   
+      
+      <div class="conatainer-fluid" >
+          <div class="d-flex flex-row align-content-center justify-content-center ">
+          <div class="card border-dark rounded-0 m-5">
+            
+              <h1 class="card-title text-center fw-bold">Login</h1>
+              <div class="conatainer d-flex flex-row align-content-center justify-content-center">
+                  <img class="img-thumbnail img-fluid float-center" style="max-width:50%" src="https://picsum.photos/536/354" alt="Card image cap">
+              </div>
+              <div class="d-block mx-auto w-50 m-3">
+                {{ form|as_crispy_errors }}
+       
+              </div>
+              <div class="card-body m-3 ">
+                  <form method="post" action="{% url 'login' %}" class="fw-bold">
+                    {% csrf_token %}
+                   
+                      
+                      {{form.username|as_crispy_field}}
+                      <div class="text-left text-danger" id="error_username">
+                      </div>
+                      {{form.password|as_crispy_field}}
+                      <div class="text-left text-danger" id="error_password">
+                      </div>
+                      <div class="text-center">
+                      <input id="submitbtn" type="submit" value="Login" class="btn btn-outline-success rounded-0 btn-lg  "  style="box-shadow: 5px 5px 0px 0px #000">
+                      </div>
+                    
+                  </form>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    
+  
+    <script>
+      
+      var username_field = document.getElementById("id_username")
+      var password_field = document.getElementById("id_password")
+      var username_error = document.getElementById("error_username")
+      var password_error = document.getElementById("error_password")
+      var login_button = document.getElementById("submitbtn")
+
+      username_field.addEventListener("keyup",username_checker);
+      password_field.addEventListener("keyup", password_checker);
+      login_button.addEventListener("click",empty_checker )
+   
+      const username_re=/^[a-zA-Z][a-zA-Z0-9]*$/;
+
+      function username_checker() {
+        if (username_field.value.length==0) {
+          username_field.style.borderColor="red"
+          username_error.textContent="Username is empty"
+        }
+        else if(username_re.test(username_field.value)){
+          
+          username_field.style.borderColor="green"
+          username_error.textContent=""
+        }
+        
+        else{
+          username_field.style.borderColor="red"
+          username_error.textContent="Invalid username format."
+        }
+      }
+      function password_checker(){
+        if (password_field.value.length==0) {
+          password_field.style.borderColor="red"
+          password_error.textContent="Password field is empty"
+        }
+        else{
+          
+          password_field.style.borderColor="green"
+          password_error.textContent=""
+        
+        }
+        
+      }
+      function empty_checker(){
+        if (username_field.value.length==0) {
+          username_field.style.borderColor="red"
+          username_error.textContent="Username is empty"
+        }
+        if (password_field.value.length==0) {
+          password_field.style.borderColor="red"
+          password_error.textContent="Password field is empty"
+        }
+      }
+      
+    </script>
+    {% endif %}
+  
+
+  
+
+ 
+{% endblock %}
