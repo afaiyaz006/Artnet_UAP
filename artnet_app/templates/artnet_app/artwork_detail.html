@@ -1,0 +1,89 @@
+{% extends "artnet_app/base.html"%}
+{%block content%}
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-flex mt-1 flex-row justify-content-center algin-item-center">
+            <div class="card rounded-0 border border-dark m-3">
+                <div class="card-header">
+                    <h1> {{artwork.name}} </h1>
+                </div>
+                <div class="card-body">
+                    <img src="{{artwork.artwork_image.url}}" class="figure-img img-fluid " alt="Responsive image">
+                </div>
+            </div>
+            <div class="card rounded-0 border border-dark m-3">
+                <div class="card-header">
+                    <h1> ArtStyle used  </h1>
+                </div>
+                <div class="card-body">
+                    <img src="{{artstyle.artStyle_image.url}}" class="figure-img img-fluid" alt="Responsive image">
+                </div>
+                
+            </div>
+
+        </div>
+        {% if user.is_authenticated %}
+        <div class="row">
+            <div class="d-flex justify-content-center align-item-center">
+                <a href="{% url 'create_artwork_artstyle' %}" class="btn btn-outline-dark"  style="box-shadow: 5px 5px 0px 0px #000">
+                        Use Style
+                </a>
+            </div>
+        </div>
+        {% endif %}
+        
+    </div>
+</div>
+<!--article>
+   <h3> {{artwork.name}}</h3>
+   
+   <article> 
+        <figure>
+            <img  src="{{artwork.artwork_image.url}}" height=600 width=800 >
+        </figure>
+    </article>
+    <br>
+    <article>
+        <figure>
+            <p> ArtStyle used </p>
+            <img src="{{artstyle.artStyle_image.url}}">
+            <br>
+            {% if user.is_authenticated %}
+                    <a href="{% url 'create_artwork_artstyle' %}">
+                        <button>Use Style </button>
+                    </a>
+              
+            {% endif %}
+        </figure>
+        
+    </article>
+    {% for comment in artwork.artcomment_set.all%}
+    <article>
+        
+        <img src='{{comment.author.profile.avatar_link}}' height=10% width=10%/>
+        <br> 
+        <b>
+            <a href='{{comment.author.profile.get_absolute_url}}'>{{comment.author}}</a>
+        </b>
+        <i>{{comment.post_date}}</i>
+        <br>
+        <text>{{comment.description}}</text>
+        
+    </article>
+    {% endfor %}
+    <br>
+    {% if user.is_authenticated %}
+        <a href="{% url 'artwork-comment' artwork.id %}"> 
+            <button>
+            Add a new comment 
+            </button>
+        </a>
+    {% else %}
+        <a href="{% url 'login' %}"> 
+            <button>
+             Login to comment    
+            </button>
+        </a>
+    {% endif %}
+</article-->
+{% endblock %}
