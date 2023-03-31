@@ -69,6 +69,27 @@
                 </div>
               
         </div>
+
+   <div class="card-body border border-dark border-width-3">
+            <h1 class="text-center">Styles</h1>
+
+        
+            <div class="d-flex justify-content-center">
+                
+                {% for artstyle in artstyles %}
+                <div class="thumbnail m-4 ">
+                    <a href="{{artstyle.get_absolute_url}}">
+                        <img src="{{artstyle.artStyle_image.url}}" alt="Lights"  style="width:100%">
+                    </a>
+                    <p class="fw-bold text-center">{{artstyle.style_name}}</p>
+                </div>
+                {% endfor %}
+                
+            </div>
+          
+        </div>
+    </div>
+</div>
         <div class="card-body border border-dark border-width-2">
             <h1 class="text-center">Styles</h1>
 
