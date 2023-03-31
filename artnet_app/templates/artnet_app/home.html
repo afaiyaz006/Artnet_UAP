@@ -6,19 +6,19 @@
             <div class="container-fluid " >
                 <div class="row gx-2">
                    
-                    <div class="col-lg-3 p-1 d-none d-sm-block">
-                        <div class="card shadow-lg border border-dark border-width-2 " style="border-radius:0">
-                            <img src="https://picsum.photos/536/354" class="float-center border-dark img-thumbnail" style="border:0" alt="..." >
-                            <div class="card-body shadow-lg  ">
-                                <h5 class="card-title">Welcome</h5>
+                    <div class="col-lg-3 mt-5 d-none d-sm-block  ">
+                        <div class="card shadow-lg border border-dark border-width-2 " >
+                            <img src="https://picsum.photos/536/354" class="float-center  img-thumbnail" style="border:0" alt="..." >
+                            <div class="card-body shadow-lg border border-dark border-width-2">
+                                <h5 class="card-title"><strong>Welcome</strong></h5>
                                 <p class="card-text">
                                     “Intelligence is an accident of evolution, and not necessarily an advantage.” – Isaac Asimov
                                 </p>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item border-dark"><a  href="{% url 'create_artwork' %}" type="button" class="btn btn-outline-dark rounded-0" style="box-shadow: 5px 5px 0px 0px #000">Create Artwork</a></li>
-                                <li class="list-group-item  border-dark"><a href="{% url 'submit_artstyle' %}" type="button" class="btn btn-outline-dark rounded-0" style="box-shadow: 5px 5px 0px 0px #000">Submit Artstyle</a></li>
-                                <li class="list-group-item  border-dark"><a href="{% url 'diffusion_art' %}" class="btn btn-outline-dark rounded-0" style="box-shadow: 5px 5px 0px 0px #000">Generate Artwork</a></li>
+                                <li class="list-group-item border-dark" style="font-weight: 50; border-width: 1px; box-shadow: 5px 5px 10px rgba(0,0,0,0.5);"><a  href="{% url 'create_artwork' %}" type="button" class="btn btn-outline-dark btn-lg px-4 me-md-2 fw-bold" style="box-shadow: 5px 5px 0px 0px #000">Create Artwork</a></li>
+                                <li class="list-group-item border-dark" style="font-weight: 50; border-width: 1px; box-shadow: 5px 5px 10px rgba(0,0,0,0.5);"><a href="{% url 'submit_artstyle' %}" type="button" class="btn btn-outline-dark btn-lg px-4 me-md-2 fw-bold" style="box-shadow: 5px 5px 0px 0px #000">Submit Artstyle</a></li>
+                                <li class="list-group-item border-dark" style="font-weight: 50; border-width: 1px; box-shadow: 5px 5px 10px rgba(0,0,0,0.5);"><a href="{% url 'diffusion_art' %}"  type="button" class="btn btn-outline-dark btn-lg px-4 me-md-2 fw-bold" style="box-shadow: 5px 5px 0px 0px #000">Generate Artwork</a></li>
                     
                             </ul>
                            
@@ -27,11 +27,11 @@
         
                     </div>
                     
-                    <div class="col-lg-6 p-1 overflow-auto " role="main">
+                    <div class="col-lg-6 mt-5 overflow-auto " role="main">
                         <div class="container d-flex flex-column justify-content-center align-items-center">
                             {% if artworks %}
                             {% for artwork in page_obj %}
-                            <div class="card mb-2  rounded  border border-dark border-width-2 rounded-0" >
+                            <div class="card mb-2  rounded  border border-dark border-width-2 " >
                                 
                                 <img src="{{artwork.artwork_image.url}}" class="card-img-top rounded-0" alt="...">
                                 <div class="card-body">
@@ -42,8 +42,8 @@
                                         {% include  'artnet_app/partials/like_area.html' %}
                                     </div>
                                     <br>
-                                    <a href="{% url 'artwork-comment' artwork.id %}"><button class='btn btn-outline-dark m-3 rounded-0' style="box-shadow: 5px 5px 0px 0px #000">Comment</button></a>
-                                    <a href="{{artwork.get_absolute_url}}"><button class='btn btn-outline-dark m-3 rounded-0' style="box-shadow: 5px 5px 0px 0px #000">View Details</button></a>
+                                    <a href="{% url 'artwork-comment' artwork.id %}"><button class='btn btn-outline-dark btn-lg px-4 me-md-2 fw-bold' style="box-shadow: 5px 5px 0px 0px #000">Comment</button></a>
+                                    <a href="{{artwork.get_absolute_url}}"><button class='btn btn-outline-dark btn-lg px-4 me-md-2 fw-bold' style="box-shadow: 5px 5px 0px 0px #000">View Details</button></a>
                                    
                                     {% endif %}
                                 </div>
@@ -57,15 +57,15 @@
                         </div>
                     </div>
                     
-                    <div class="col-lg-3 pl p-1  d-none d-sm-block">
+                    <div class="col-lg-3 pl mt-5  d-none d-sm-block">
                         <div class="container d-flex flex-column justify-content-center align-item-center">
-                            <div class="card border border-dark border-width-2 rounded-0">
-                                <div class="card-header">
-                                    Notifications
+                            <div class="card border border-dark border-width-2">
+                                <div class="card-header"><strong>Notifications</strong></div>
+                                <div class="card-body" style="border-top: 0px solid black;">
+                                    Splash10 Liked your photo.
                                 </div>
-                                <div class="card-body">
-                                    Dash Dash Liked your photo.
-        
+                                <div class="card-body" style="border-top: 0px solid black;">
+                                    Mist comment  your photo.
                                 </div>
                             </div>
         
@@ -103,14 +103,14 @@
             {% endif %}
        
         {% if user.is_authenticated == False %}
-        <div class="container" style="background-color:white" >
-            <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center mt-2 rounded-0 border border-dark shadow-lg">
+        <div class="container" style="background-color:transparent" >
+            <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center mt-5 border border-dark shadow-lg" style="border-radius: 10px;">            
               <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-                <h1 class="display-4 fw-bold lh-1">ARTNET</h1>
-                <p class="lead">Artnet is a platform for creating and generating ai based artworks.</p>
+                <h1 class="display-4 fw-bold lh-1" style="font-family: 'Bree Serif', serif; color:#120326">ARTNET</h1>
+                <p class="lead" style="color: black">Artnet is a platform for creating and generating ai based artworks.</p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
                   <a href="{% url 'login' %}"  class="btn btn-outline-dark btn-lg px-4 me-md-2 fw-bold" style="box-shadow: 5px 5px 0px 0px #000">Login</a>
-                  <a href="{% url 'signup' %}" class="btn btn-outline-dark btn-lg px-4" style="box-shadow: 5px 5px 0px 0px #000">SignUp </a>
+                  <a href="{% url 'signup' %}" class="btn btn-outline-dark btn-lg px-4 me-md-2 fw-bold" style="box-shadow: 5px 5px 0px 0px #000">SignUp </a>
                 </div>
               </div>
               <div class="col-lg-4 offset-lg-1 m-3 overflow-hidden shadow-lg">
