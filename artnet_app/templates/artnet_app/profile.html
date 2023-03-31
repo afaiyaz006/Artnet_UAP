@@ -1,31 +1,33 @@
 {% extends 'artnet_app/base.html' %}
 {% block content %}
-<div class="row" >
-    <div class="container d-flex flex-row justify-content-center align-content-center p-3" >
-        <div class="card border rounded-0 border-dark border-width:5px p-3">
-            <div class="container d-flex flex-row justify-content-center align-content-center">
-                <img style="max-width:80px; max-height:80px" class="card-img-top rounded-circle img-thumbnail border-dark" style="box-shadow: 5px 5px 0px 0px #000" src="{{user.profile.avatar_link}}" alt="Card image cap">
+<div class="row mt-5">
+    <div class="container d-flex flex-row justify-content-center align-content-center mb-5" >
+        <!-- #C3DEB7 -->
+        <div class="card border border-dark border-width:5px p-5" style="background-color: white;">
+            <div class="container d-flex flex-row justify-content-center align-content-center" >
+                <img style="max-width:80px; max-height:80px" class="card-img-top rounded-circle img-thumbnail border-dark" style="box-shadow: 5px 5px 0px 0px black" src="{{user.profile.avatar_link}}" alt="Card image cap">
             </div>
-            <div class="p-3 card border border-dark border-width-2 rounded-0 mt-2" style="width: 18rem;">
-                <p class="text-center">
-                    Hello there!! {{user.profile.first_name}}
-
+            <div class="p-3 card border border-dark border-width-2 mt-2 mx-auto my-auto" style=" background-color: white; width: 40rem;" >           
+                
+                <p class="text-center" style=" font-weight: bold; color: black;" >
+                    Hello there! {{user.profile.first_name}}
+                  
                 </p>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item border-dark">
+                <ul class="list-group list-group-flush"  style="font-weight: bold; color: black;">
+                  <li class="list-group-item border-dark" style="background-color: white;">
                     First Name: {{user.profile.first_name}}
                   </li>
-                  <li class="list-group-item border-dark">
+                  <li class="list-group-item border-dark" style="background-color: white;">
                     Last Name: {{user.profile.last_name}}
                 </li>
-                  <li class="list-group-item border-dark">
+                  <li class="list-group-item border-dark" style="background-color: white;">
                     Email: {{user.profile.email}}
                 </li>
-                  <li class="list-group-item border-dark">
+                  <li class="list-group-item border-dark" style="background-color: white;">
                     Gender: {{user.profile.gender}}
                     
                   </li>
-                  <li class="list-group-item">
+                  <li class="list-group-item" style="background-color: white;">
                     Occupation:
                     {{user.profile.occupation}}
                       
@@ -33,12 +35,15 @@
                   
                 </ul>
               </div>
-              <div class="card border border-dark border-width-2 rounded-0 m-3">
+             
+              
+              <div class="btn btn-lg px-4 me-md-2 fw-bold">
+              <!-- <div class="btn btn-outline-dark btn-lg px-4 me-md-2 fw-bold"> -->
                 <p class="text-center">What you wanna do?</p>
             
-                <a  href="{% url 'create_artwork' %}" type="button" class="btn btn-outline-dark rounded-0 m-3" style="box-shadow: 5px 5px 0px 0px #000">Create Artwork</a>
-                <a href="{% url 'submit_artstyle' %}" type="button" class="btn btn-outline-dark rounded-0 m-3" style="box-shadow: 5px 5px 0px 0px #000">Submit Artstyle</a>
-                <a href="{% url 'diffusion_art' %}" class="btn btn-outline-dark rounded-0 m-3" style="box-shadow: 5px 5px 0px 0px #000">Generate Artwork</a>
+                <a  href="{% url 'create_artwork' %}" type="button" class="btn btn-outline-dark btn-lg px-4 me-md-2 fw-bold" style="box-shadow: 5px 5px 0px 0px #000">Create Artwork</a>
+                <a href="{% url 'submit_artstyle' %}" type="button" class="btn btn-outline-dark btn-lg px-4 me-md-2 fw-bold" style="box-shadow: 5px 5px 0px 0px #000">Submit Artstyle</a>
+                <a href="{% url 'diffusion_art' %}" type ="button" class="btn btn-outline-dark btn-lg px-4 me-md-2 fw-bold" style="box-shadow: 5px 5px 0px 0px #000">Generate Artwork</a>
             </div>
             
         </div>
@@ -47,10 +52,10 @@
 </div>
 <div class="row" >
     <div class="card border border-dark border-width-2">
-        <div class="card-header">
+        <!-- <div class="card-header">
             <h1 class="text-center"> Gallery </h1>
 
-        </div>
+        </div> -->
         <div class="card-body border border-dark border-width-2">
 
             <h1 class="text-center"> Artwork </h1>
