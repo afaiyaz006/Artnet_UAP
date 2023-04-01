@@ -8,6 +8,7 @@ from .views import famousArtWorkCreation,ArtStyleDetailView
 from .views import ProfileDetailView,ProfileListView,like_artwork
 from .views import searchview
 from .views import generatedArtworkCreation
+from .views import clear_notifications
 urlpatterns = [
     path('',home,name='home'),
     path('signup',signup,name='signup'),
@@ -23,6 +24,7 @@ urlpatterns = [
     path('users/<int:pk>',ProfileDetailView.as_view(),name='user-details'),
     path('users',ProfileListView.as_view(),name='user-list'),
     path('like/<int:id>',like_artwork,name='like_artwork'),
+    path('clear_notification/<int:id>',clear_notifications,name='clear_notifications'),
     path('search',searchview,name='search'),
     path('diffusion_art',generatedArtworkCreation,name='diffusion_art')
 ]
