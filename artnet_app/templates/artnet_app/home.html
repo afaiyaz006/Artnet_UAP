@@ -61,15 +61,48 @@
                         <div class="container d-flex flex-column justify-content-center align-item-center">
                             <div class="card border border-dark border-width-2">
                                 <div class="card-header"><strong>Notifications</strong></div>
-                                <div class="card-body" style="border-top: 0px solid black;">
-                                    Splash10 Liked your photo.
+                                {% if ns %}
+                                
+                                {%for n in ns%}
+                                <!-- displaying notifcation -->
+                                  
+                                  <div class="card p-3">
+                                    {{n.message|safe}}
+                                    {{n.timestamp}}
+                                  </div>
+                                {%endfor%}
+                                <div class="d-flex justify-content-center align-items-center m-3">
+                                <a href="{% url 'clear_notifications' user.id %}" class="btn btn-outline-dark">Clear</a>
                                 </div>
-                                <div class="card-body" style="border-top: 0px solid black;">
-                                    Mist comment  your photo.
+                                {% else %}
+                                <div class="card p-3">
+                                    You have no notifications.
+                                </div>
+                                {% endif %}
+                                
+                            </div>
+                           
+                            <div class="card border rounded-100 border-dark mt-5 justify-content-center align-items-center" style="background-color:#161616">
+                                <div class="d-flex flex-column">
+                                <div class="cat">
+                                    <div class="ear ear--left"></div>
+                                    <div class="ear ear--right"></div>
+                                    <div class="face">
+                                        <div class="eye eye--left">
+                                            <div class="eye-pupil"></div>
+                                        </div>
+                                        <div class="eye eye--right">
+                                            <div class="eye-pupil"></div>
+                                        </div>
+                                        <div class="muzzle"></div>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
-        
+                            </div>
+                         
                         </div>
+                        
                     </div>
                     
         
@@ -114,7 +147,7 @@
                 </div>
               </div>
               <div class="col-lg-4 offset-lg-1 m-3 overflow-hidden shadow-lg">
-                <img class="rounded-lg-3 img-fluid" src="https://picsum.photos/536/354" alt="" width="720">
+                <img class="rounded-lg-3 img-fluid" src="https://w.wallhaven.cc/full/4g/wallhaven-4gjpw7.jpg" alt="" width="720">
             </div>
               
             </div>

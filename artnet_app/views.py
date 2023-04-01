@@ -13,6 +13,7 @@ from django.urls import reverse
 from django.shortcuts import render,redirect
 from .forms import SignupForm,ArtWork_with_Famous_ArtStyle
 from django.core.paginator import Paginator
+from .models import Notifications
 
 # Creating my  views here.
 
@@ -28,7 +29,13 @@ def home(request):
     paginator=Paginator(artworks,2) # show 5 artworks per page
     page_number=request.GET.get('page')
     page_obj=paginator.get_page(page_number)
-    return render(request,'artnet_app/home.html',{'artworks':artworks,'page_obj':page_obj})
+    if request.user.is_authenticated:
+        notifications=Notifications.objects.filter(notify_user=request.user,is_read=False).order_by("-timestamp")
+    else:
+        notifications=[]
+    if len(notifications)==0:
+        notifications=None
+    return render(request,'artnet_app/home.html',{'artworks':artworks,'page_obj':page_obj,'ns':notifications})
 
 @login_required
 def profileview(request):
@@ -289,6 +296,20 @@ class ArtWorkCommentCreate(LoginRequiredMixin,generic.CreateView):
         form.instance.author = self.request.user
         #Associate comment with artwork based on passed id
         form.instance.artwork=get_object_or_404(ArtWork, pk = self.kwargs['pk'])
+
+        #notification behavior
+        
+        from_user=self.request.user.username
+        to_user=User.objects.get(id=form.instance.artwork.id)
+        if from_user!=to_user.username:
+            artwork_url=form.instance.artwork.get_absolute_url()
+            notifcation_message=f"{from_user} commented on your artwork <a href='{artwork_url}'>See Details</a>"
+
+            print(notifcation_message)
+            n=Notifications.objects.create(is_read=False,notify_user=to_user,message=notifcation_message)
+            n.save()
+
+
         # Call super-class form validation behaviour
         return super(ArtWorkCommentCreate, self).form_valid(form)
 
@@ -322,13 +343,23 @@ def signup(request):
 
 @login_required
 def like_artwork(request,id):
+    
     if request.method == "POST":
         artwork = ArtWork.objects.get(id=id)
         if not artwork.likes.filter(id=request.user.id).exists():
             print(f"User ID: {request.user.id} Liked artwork Artwork ID: {artwork.id}.")
+            if request.user.id!=artwork.author.id:
+                from_user = User.objects.get(id=request.user.id)
+                to_user=artwork.author
+                notification_message=f"{from_user.username} liked your artwork <a href='{artwork.get_absolute_url()}'>{artwork.name}</a>"
+                print(notification_message)
+                n=Notifications.objects.create(is_read=False,notify_user=to_user,message=notification_message)
+                n.save()
             artwork.likes.add(request.user)
-            artwork.save() 
+            artwork.save()
+
             return render( request, 'artnet_app/partials/like_area.html', context={'artwork':artwork})
+        
         else:
             print(f"User ID: {request.user.id} unliked Artwork ID: {artwork.id}.")
             artwork.likes.remove(request.user)
@@ -367,3 +398,18 @@ def generatedArtworkCreation(request):
         print("empty")
         form=TextPromptForm()
     return render(request,'artnet_app/generated_artwork_create.html',{'form':form})
+
+@login_required
+def clear_notifications(request,id):
+    #print(f"{id}")
+    if request.method=='GET':
+        to_user=User.objects.get(id=id)
+        notifications=Notifications.objects.filter(notify_user=to_user)
+        print(notifications)
+        for notification in notifications:
+            notification.is_read=True
+            notification.save()
+        return home(request)
+    else:
+        return home(request)
+        
