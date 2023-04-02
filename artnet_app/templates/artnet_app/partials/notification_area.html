@@ -1,0 +1,20 @@
+<div hx-get="{% url 'get_notifications' %}" hx-trigger="every 5s" hx-swap="innerHTML">
+{% if ns %}
+{%for n in ns%}
+<div class="card p-3">
+    {{n.message|safe}}
+    {{n.timestamp}}
+</div>
+{%endfor%}
+
+<div class="d-flex justify-content-center align-items-center m-3">
+    <a href="{% url 'clear_notifications' user.id %}" class="btn btn-outline-dark m-3 ">Clear</a>
+    <a href="{% url 'notificationview'  %}" class="btn btn-outline-dark m-3 ">See All</a>
+</div>
+    
+{% else %}
+<div class="card p-3">
+    You have no notifications.
+</div>
+{% endif %}
+</div>
