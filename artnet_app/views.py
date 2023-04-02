@@ -412,4 +412,13 @@ def clear_notifications(request,id):
         return home(request)
     else:
         return home(request)
+    
+@login_required
+def get_notifications(request):
+    if request.method=='GET':
+        ns=Notifications.objects.filter(notify_user=request.user,is_read=False).order_by("-timestamp")
+        if ns:
+            return render(request,'artnet_app/partials/notification_area.html',{'ns':ns})  
+        else:
+            return render(request,'artnet_app/partials/notification_area.html',{'ns':None})
         
