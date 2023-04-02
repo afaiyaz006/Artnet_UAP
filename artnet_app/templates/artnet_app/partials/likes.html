@@ -1,0 +1,3 @@
+<h1 hx-get="{% url 'get_likes' artwork.id %}" hx-trigger="every 5s" hx-swap="innerHTML">
+     ❤️ {{artwork.likes.count}}  
+</h1>
