@@ -416,6 +416,9 @@ def clear_notifications(request,id):
 
 @login_required
 def notificationview(request):
+    """
+    Notification view to display list of notification.
+    """
     nts=Notifications.objects.filter(notify_user=request.user).order_by("-timestamp")
     
     return render(request,'artnet_app/notifications.html',{'nts':nts})
