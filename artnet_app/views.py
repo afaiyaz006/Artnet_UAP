@@ -26,7 +26,7 @@ def home(request):
     #loading all  artworks 
     
     artworks=ArtWork.objects.order_by("post_date")
-    paginator=Paginator(artworks,2) # show 5 artworks per page
+    paginator=Paginator(artworks,2) # show 2 artworks per page
     page_number=request.GET.get('page')
     page_obj=paginator.get_page(page_number)
     if request.user.is_authenticated:
@@ -305,7 +305,7 @@ class ArtWorkCommentCreate(LoginRequiredMixin,generic.CreateView):
             artwork_url=form.instance.artwork.get_absolute_url()
             notifcation_message=f"{from_user} commented on your artwork <a href='{artwork_url}'>See Details</a>"
 
-            print(notifcation_message)
+            #print(notifcation_message)
             n=Notifications.objects.create(is_read=False,notify_user=to_user,message=notifcation_message)
             n.save()
 
@@ -412,15 +412,29 @@ def clear_notifications(request,id):
         return home(request)
     else:
         return home(request)
-    
+
+@login_required
+def get_likes(request,id):
+    if request.method=='GET':
+        artwork = ArtWork.objects.get(id=id)
+        if artwork:
+            return render(request,'artnet_app/partials/likes.html',{'artwork':artwork})
+
+@login_required
+def get_notifications(request):
+    if request.method=='GET':
+        ns=Notifications.objects.filter(notify_user=request.user,is_read=False).order_by("-timestamp")
+        if ns:
+            return render(request,'artnet_app/partials/notification_area.html',{'ns':ns})  
+        else:
+            return render(request,'artnet_app/partials/notification_area.html',{'ns':None})
 
 @login_required
 def notificationview(request):
-    """
-    Notification view to display list of notification.
-    """
     nts=Notifications.objects.filter(notify_user=request.user).order_by("-timestamp")
     
     return render(request,'artnet_app/notifications.html',{'nts':nts})
-       
-        
+
+@login_required
+def emotionRecognition(request):
+    return render(request,'artnet_app/emotion_recognition.html')
