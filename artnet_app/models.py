@@ -149,3 +149,9 @@ class GeneratedArtwork(models.Model):
 
 class BackEnd(models.Model):
     back_end_url=models.URLField(max_length=1000)
+    
+class Notifications(models.Model):
+    is_read = models.BooleanField(default=False)
+    notify_user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    message=models.TextField()
+    timestamp=models.DateTimeField(default=timezone.now)
