@@ -13,6 +13,14 @@ class SignupForm(UserCreationForm):
     class Meta:
         model=User
         fields=('username','first_name','last_name','gender','occupation','email','password1','password2')
+        help_texts = {
+            'username': None,
+        }
+    def __init__(self, *args, **kwargs):
+        super(UserCreationForm, self).__init__(*args, **kwargs)
+
+        for fieldname in ['username', 'password1', 'password2']:
+            self.fields[fieldname].help_text = None
 
 class Imageform(forms.ModelForm):
     """
