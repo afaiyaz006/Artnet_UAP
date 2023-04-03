@@ -1,0 +1,126 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Assistant:300,400,600,700&display=swap&subset=hebrew" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Caveat&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=vdEtXUD15jfDq3J0ham9j6UZylEGkHqZJLxE6rO5oVlqq_o8VVcxKQP-UX73OTjur_lajZ8n-ace8GnW0w0JQouO8chDvRlyGeCjccT729Mpgu4kELn-CUvFGYXymtmul0mdtP63Yj79wYPjYCx2Lw" charset="UTF-8"></script><script src="https://use.fontawesome.com/fd40438538.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bilai_style.css' %}">
+
+    <title>🖌️ARTNET</title>
+</head>
+
+<body>
+    <div id="container">
+        <div id="leftSide">
+            
+              
+            <div class="container">
+                <div class="cat">
+                    <div class="cat-head">
+                        <div class="cat-ears">
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="cat-face">
+                            <div class="cat-eyes">
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div class="cat-nose">
+                                <div class="mustache">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div class="mustache">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <span class="mouth hide"></span>
+                        </div>
+                    </div>
+                    <div class="hand-wrap">
+                        <div class="hand">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div id="rightSide" class="door">
+            <p>
+                 <i class="fa fa-long-arrow-left" aria-hidden="true" style="color: #013d31"></i>  <strong style="color: black;">WELCOME TO ARTNET</strong>
+            </p>
+            <div id="drag">
+            </div>
+        </div>
+    </div>
+    <script>
+        var isResizing = false,
+            lastDownX = 0;
+
+        (function() {
+            var container = document.getElementById("container"),
+                left = document.getElementById("leftSide"),
+                right = document.getElementById("rightSide"),
+                handle = document.getElementById("drag"),
+                catHand = document.querySelector('.hand-wrap .hand');
+
+            handle.onmousedown = function(e) {
+                isResizing = true;
+                lastDownX = e.clientX;
+            };
+
+            document.onmousemove = function(e) {
+                if (!isResizing) {
+                    return;
+                }
+                var offsetRight = container.clientWidth - (e.clientX - container.offsetLeft);
+
+                left.style.right = offsetRight + "px";
+                right.style.width = offsetRight + "px";
+                catHand.style.width = left.clientWidth;
+                if (left.clientWidth < 270) {
+                    left.className = "closing";
+                    catHand.style.width = left.clientWidth + "px";
+                    document.querySelector('.hand-wrap').style.width = left.clientWidth + "px";
+                    //console.log("A")
+                    var delayInMilliseconds = 1000; //1 second
+
+                    setTimeout(function() {
+                    //your code to be executed after 1 second
+                    }, delayInMilliseconds);
+                    window.location.replace('{% url 'home' %}')
+
+
+
+                } else {
+                    left.className = "";
+                    catHand.removeAttribute('style');
+                    document.querySelector('.hand-wrap').removeAttribute('style');
+                    console.log("B")
+                }
+                if (left.clientWidth < 170) {
+                    document.querySelector('.mouth').style.display = "block";
+                    console.log("C")
+                } else {
+                    document.querySelector('.mouth').style.display = "none";
+                    console.log("D")
+                }
+            }
+
+            document.onmouseup = function(e) {
+                isResizing = false;
+            }
+        })();
+    </script>
+
+</body>
