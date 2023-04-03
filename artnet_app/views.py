@@ -300,7 +300,7 @@ class ArtWorkCommentCreate(LoginRequiredMixin,generic.CreateView):
         #notification behavior
         
         from_user=self.request.user.username
-        to_user=User.objects.get(id=form.instance.artwork.id)
+        to_user=form.instance.artwork.author
         if from_user!=to_user.username:
             artwork_url=form.instance.artwork.get_absolute_url()
             notifcation_message=f"{from_user} commented on your artwork <a href='{artwork_url}'>See Details</a>"
