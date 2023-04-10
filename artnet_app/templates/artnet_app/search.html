@@ -1,0 +1,136 @@
+{% extends 'artnet_app/base.html' %}
+{% block content%}
+
+<div class="d-flex justify-content-center m-2">
+    <form method="get" action="{% url 'search' %}" class="w-50">
+      <div class="row">
+        <div class="col-12">
+          <input name='sq' class="form-control" type="text" style="box-shadow: 5px 5px 0px 0px #000" placeholder="Search artstyles,artworks,users....." aria-label="Search">
+        </div>
+      </div>
+    </form>
+</div>
+
+{% if artworks %}
+<div class="container mb-5">
+    <div class="row">
+      <div class="col-sm-6 mx-auto">
+        
+        <div class="card p-3 border border-dark border-width-2 " style="box-shadow: 5px 5px 0px 0px #000">
+        <h1 class="text-center"> Artworks</h1>
+        {% for artwork in artworks %}
+          <div class="card text-center m-2" style="box-shadow: 5px 5px 0px 0px #000">
+           
+            <img class="card-img-top" src="{{artwork.artwork_image.url}}" alt="Card image cap">
+            <div class="card-body">
+              <p class="card-text">
+                {{artwork.name}}
+                <a href="{{artwork.get_abosolute_url}}">See Details</a>
+              </p>
+            </div>
+           
+          </div>
+          {% endfor %}
+        </div>
+                 
+      </div>
+    </div>
+</div>
+{% else %}
+<div class="container mb-5">
+    <div class="row">
+      <div class="col-sm-6 mx-auto">
+        <div class="card p-3 border border-dark border-width-2" style="box-shadow: 5px 5px 0px 0px #000">
+            <h1 class="text-center"> Artworks</h1>
+            <h3 class="text-center">Nothing here just crickets 🦗.</h3>
+        </div>
+    </div>           
+</div>
+{% endif %}
+
+
+
+
+{% if artstyles %}
+<div class="container mb-3">
+    <div class="row">
+      <div class="col-sm-6 mx-auto">
+        
+        <div class="card p-3" style="box-shadow: 5px 5px 0px 0px #000">
+            <h1 class="text-center"> Artstyles</h1>
+        {% for artstyle in artstyles %}
+          <div class="card text-center m-2">
+           
+            <img class="card-img-top" src="{{artstyle.artStyle_image.url}}" alt="Card image cap">
+            <div class="card-body">
+              <p class="card-text">
+                {{artstyle.style_name}}
+                <a href="{{artwork.get_abosolute_url}}">See Details</a>
+              </p>
+            </div>
+           
+          </div>
+          {% endfor %}
+        </div>
+                 
+      </div>
+    </div>
+</div>
+{% else %}
+<div class="container mt-3">
+    <div class="row">
+      <div class="col-sm-6 mx-auto">
+        <div class="card border border-dark border-width-2 p-3" style="box-shadow: 5px 5px 0px 0px #000">
+            <h1 class="text-center"> Artstyles</h1>
+            <h3 class="text-center">Nothing here just crickets 🦗.</h3>
+        </div>
+    </div>           
+</div>
+{% endif %}
+
+
+{% if users %}
+<div class="container mb-3">
+    <div class="row">
+      <div class="col-sm-6 mx-auto">
+        
+        <div class="card p-3" style="box-shadow: 5px 5px 0px 0px #000">
+            <h1 class="text-center"> Users</h1>
+        {% for user in users %}
+          <div class="card text-center m-2">
+           
+            <div class="container d-flex flex-row justify-content-center align-content-center">
+                <img style="max-width:80px; max-height:80px" class="card-img-top rounded-circle img-thumbnail border-dark" style="box-shadow: 5px 5px 0px 0px #000" src="{{user.profile.avatar_link}}" alt="Card image cap">
+            </div>
+            <div class="card-body">
+              <p class="card-text">
+                {{user.username}}
+                <a href="{{user.profile.get_absolute_url}}">See Details</a>
+              </p>
+            </div>
+           
+          </div>
+          {% endfor %}
+        </div>
+                 
+      </div>
+    </div>
+</div>
+{% else %}
+<div class="container mt-3">
+    <div class="row">
+      <div class="col-sm-6 mx-auto">
+        <div class="card p-3 border border-dark border-width-2" style="box-shadow: 5px 5px 0px 0px #000">
+            <h1 class="text-center"> Users</h1>
+            <h3 class="text-center">Nothing here just crickets 🦗.</h3>
+        </div>
+    </div>           
+</div>
+{% endif %}
+
+
+
+
+
+
+{% endblock %}
