@@ -1,22 +1,22 @@
 {% extends "artnet_app/base.html"%}
 {%block content%}
-<div class="container-fluid"><!--container fluid added-->
+<div class="container-fluid">
     <div class="row">
         <div class="d-flex mt-1 flex-row justify-content-center algin-item-center">
-            <div class="card rounded-0 border border-dark m-3"><!--creating a card.Card border added-->
+            <div class="card rounded-0 border border-dark m-3">
                 <div class="card-header">
                     <h1> {{artwork.name}} </h1>
                 </div>
                 <div class="card-body">
-                    <img src="{{artwork.artwork_image.url}}" class="figure-img img-fluid " alt="Responsive image">
+                    <img src="{{artwork.artwork_image.url}}" class="img-fluid" style="width:640px;height:480px" alt="Responsive image">
                 </div>
             </div>
             <div class="card rounded-0 border border-dark m-3">
-                <div class="card-header"><!--card-header contains used artstyle. After that there is card body-->
+                <div class="card-header">
                     <h1> ArtStyle used  </h1>
                 </div>
                 <div class="card-body">
-                    <img src="{{artstyle.artStyle_image.url}}" class="figure-img img-fluid" alt="Responsive image">
+                    <img src="{{artstyle.artStyle_image.url}}" class="img-fluid" style="width:640px;height:480px" alt="Responsive image">
                 </div>
                 
             </div>
@@ -24,12 +24,49 @@
         </div>
         {% if user.is_authenticated %}
         <div class="row">
-            <div class="d-flex justify-content-center align-item-center"><!--aligning item to the center-->
+            <div class="d-flex justify-content-center align-item-center">
                 <a href="{% url 'create_artwork_artstyle' %}" class="btn btn-outline-dark"  style="box-shadow: 5px 5px 0px 0px #000">
                         Use Style
                 </a>
             </div>
         </div>
+        
+        
+        {% endif %}
+        <div class="row">
+            <div class="col-3">
+            </div>
+            <div class="col-6 align-item-center">
+            <div class="m-3 d-flex flex-column justify-content-center align-item-center">
+                {% for comment in artwork.artcomment_set.all reversed %}
+                <div class="card border border-dark p-3 m-3">
+                    <div class="d-flex flex-row">
+                    <img src='{{comment.author.profile.avatar_link}}' class="card-img-top rounded-circle img-thumbnail border-dark" style="max-width:80px; max-height:80px"/>
+      
+                    <a href='{{comment.author.profile.get_absolute_url}}'>{{comment.author}}</a>
+                    </div>
+                    <div class="card-body">
+                        <i>{{comment.post_date}}</i><br>
+                        <bold>{{comment.description}}</bold>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col-3">
+            </div>
+        </div>
+        </div>
+        
+        {% if user.is_authenticated %}
+        <div class="d-flex flex-row justify-content-center align-item-center">
+        <a href="{% url 'artwork-comment' artwork.id %}" class="btn btn-outline-dark"> 
+            Add a new comment 
+        </a>
+    </div>
+        {% else %}
+        <a class="btn btn-outline-dark" href="{% url 'login' %}"> 
+             Login to comment    
+        </a>
         {% endif %}
         
     </div>
