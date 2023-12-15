@@ -1,3 +1,3 @@
 # Artnet_UAP
-This is just a modified frontend experiment for the original artnet project.
-Please refer to the original repository for original artnet https://github.com/afaiyaz006/artnet
+This is a modified frontend experiment for the artnet project.
+Please refer to the [original repository](https://github.com/afaiyaz006/artnet)  for more organized codebase.
